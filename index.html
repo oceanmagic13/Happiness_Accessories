@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happiness Accessories | Luxury Boutique</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --sunshine-yellow: #FFEA20; /* Vibrant Neon Sunshine */
+            --soft-pink: #FF1493;       /* Deep Vibrant Fuchsia Pink */
+            --pastel-yellow-light: #FFFDF0;
+            --charcoal: #1E293B;        /* Sharper contrast dark slate */
+            --white: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--pastel-yellow-light);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* --- VIBRANT ANNOUNCEMENT BAR --- */
+        .announcement-bar {
+            background-color: var(--soft-pink);
+            color: var(--white);
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .announcement-bar span {
+            color: var(--sunshine-yellow);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            font-family: 'Parisienne', cursive;
+            font-size: 2.5rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-logo span {
+            color: var(--soft-pink);
+            text-shadow: 1px 1px 0px var(--sunshine-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--soft-pink);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--soft-pink);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--charcoal);
+        }
+
+        .nav-icons i:hover {
+            color: var(--soft-pink);
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--soft-pink);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(255,234,32,0.6) 0%, rgba(255,20,147,0.4) 100%);
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 60px;
+            border-bottom: 5px solid var(--sunshine-yellow);
+        }
+
+        .hero h2 {
+            font-family: 'Parisienne', cursive;
+            font-size: 5rem;
+            color: var(--charcoal);
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .btn-luxury {
+            background-color: var(--charcoal);
+            color: var(--white);
+            border: 2px solid var(--charcoal);
+            padding: 14px 40px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-luxury:hover {
+            background-color: var(--white);
+            color: var(--soft-pink);
+            border-color: var(--soft-pink);
+        }
+
+        /* --- CONTAINERS & HEADERS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h3 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            color: var(--charcoal);
+        }
+
+        .section-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, var(--sunshine-yellow), var(--soft-pink));
+        }
+
+        /* --- BRAND PILLARS --- */
+        .brand-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .pillar-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            border-color: var(--sunshine-yellow);
+            transform: translateY(-3px);
+        }
+
+        .pillar-card i {
+            font-size: 2.5rem;
+            color: var(--soft-pink);
+            margin-bottom: 15px;
+        }
+
+        .pillar-card h5 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .pillar-card p {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #556270;
+        }
+
+        /* --- CATEGORY CHIPS --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-chip {
+            background: var(--white);
+            border: 2px solid var(--charcoal);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .filter-chip.active, .filter-chip:hover {
+            background-color: var(--soft-pink);
+            color: var(--white);
+            border-color: var(--soft-pink);
+            box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3);
+        }
+
+        /* --- MARKET CARD GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.15);
+        }
+
+        .product-visual {
+            height: 280px;
+            background-color: #FAFAFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5.5rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-visual {
+            background-color: rgba(255, 234, 32, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--sunshine-yellow);
+            color: var(--charcoal);
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-details {
+            padding: 25px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: var(--white);
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--soft-pink);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .btn-add-cart {
+            background: none;
+            border: 2px solid var(--charcoal);
+            padding: 12px;
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--soft-pink);
+            border-color: var(--soft-pink);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(255, 20, 147, 0.2);
+        }
+
+        /* --- BRAND STORY SECTION --- */
+        .brand-story {
+            background-color: var(--white);
+            padding: 60px 40px;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+        }
+
+        .story-visual {
+            font-size: 8rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--pastel-yellow-light), var(--soft-pink));
+            padding: 40px;
+            border-radius: 4px;
+        }
+
+        .story-text h4 {
+            font-family: 'Parisienne', cursive;
+            font-size: 2.5rem;
+            color: var(--soft-pink);
+            margin-bottom: 15px;
+        }
+
+        .story-text p {
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        /* --- PREMIUM EDITORIAL REVIEWS (Sophisticated 3x2 Setup) --- */
+        .reviews-section {
+            margin-bottom: 80px;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .review-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 30px;
+            border-left: 4px solid var(--sunshine-yellow);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .stars {
+            color: var(--sunshine-yellow);
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+
+        /* --- LOOKBOOK GALLERY --- */
+        .lookbook-section {
+            margin-bottom: 80px;
+        }
+
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .lookbook-item {
+            height: 260px;
+            background-color: var(--white);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .lookbook-item:hover {
+            transform: scale(1.03);
+            border-color: var(--soft-pink);
+            background-color: rgba(255, 234, 32, 0.05);
+        }
+
+        .lookbook-item span {
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        /* --- FOOTER FORMS --- */
+        .footer-forms {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .form-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.03);
+        }
+
+        .form-card h4 {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E2E8F0;
+            font-family: inherit;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--soft-pink);
+        }
+
+        /* --- SHOPPING DRAWER --- */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -8px 0 35px rgba(0,0,0,0.15);
+            z-index: 2000;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+
+        .cart-drawer.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-items-list {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #E2E8F0;
+        }
+
+        .cart-footer {
+            border-top: 2px solid #F1F5F9;
+            padding-top: 20px;
+        }
+
+        .promo-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .promo-section input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #E2E8F0;
+            border-radius: 4px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+        }
+
+        /* --- SOPHISTICATED CHECKOUT MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .checkout-modal {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-body {
+            padding: 35px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--charcoal);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--sunshine-yellow);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .express-pay {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-express {
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .btn-apple { background-color: #000000; color: #FFFFFF; }
+        .btn-paypal { background-color: #FFB700; color: #003087; }
+
+        .form-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .form-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #E2E8F0;
+            z-index: 1;
+        }
+
+        .form-divider span {
+            background-color: var(--white);
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+            font-size: 0.85rem;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .checkout-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .order-summary-box {
+            background-color: var(--pastel-yellow-light);
+            border: 1px solid rgba(255, 20, 147, 0.1);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .order-summary-box h5 {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--soft-pink);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--charcoal);
+            color: var(--white);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="announcement-bar">
+        ✨ Free Shipping on Custom Orders over $50! Use Code: <span>JOY</span> ✨
+    </div>
+
+    <nav>
+        <a href="#" class="nav-logo">Happiness <span>Accessories</span></a>
+        <ul class="nav-links">
+            <li><a href="#shop">Collection</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#reviews">Appreciations</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
+            <li><a href="#connect">Connect</a></li>
+        </ul>
+        <div class="nav-icons">
+            <div class="cart-icon-wrapper" onclick="toggleCart(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <div class="cart-badge" id="cartBadge">0</div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h2>Sophisticated Joy</h2>
+        <p>Finely Crafted Sunshine & Soft Pink Statements</p>
+        <button class="btn-luxury" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Explore The Curation</button>
+    </header>
+
+    <div class="container">
+
+        <section class="brand-pillars">
+            <div class="pillar-card">
+                <i class="fa-solid fa-hands-holding"></i>
+                <h5>100% Handmade</h5>
+                <p>Meticulously hand-woven individual statements.</p>
+            </div>
+            <div class="pillar-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h5>Small-Batch Curation</h5>
+                <p>Limited edition colorways and bead setups.</p>
+            </div>
+            <div class="pillar-card">
+                <i class="fa-solid fa-heart-circle-check"></i>
+                <h5>Made with Love</h5>
+                <p>Crafted thoughtfully by Khushi since age 8.</p>
+            </div>
+        </section>
+
+        <section id="shop">
+            <div class="section-header">
+                <h3>The Retail Collection</h3>
+            </div>
+
+            <div class="filter-container">
+                <span class="filter-chip active" onclick="filterProducts('all', this)">All Accessories</span>
+                <span class="filter-chip" onclick="filterProducts('bracelets', this)">Bracelets</span>
+                <span class="filter-chip" onclick="filterProducts('jewelry', this)">Other Jewelry</span>
+                <span class="filter-chip" onclick="filterProducts('lifestyle', this)">Lifestyle</span>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+            </div>
+        </section>
+
+        <section id="story" class="brand-story">
+            <div class="story-visual">💕</div>
+            <div class="story-text">
+                <h4>The Curated Legacy</h4>
+                <p>Hi! My name is Khushi and I'm 12 years old. I run my own bracelet business and I've been running it since I was 8 years old. Making bracelets is one of my favorite things to do so I made a business out of it. Everything is handmade by me, on my own. </p>
+                <p>Every piece is sourced with impeccable attention to small-batch detailing, eco-conscious materials, and timeless luxury appeal to amplify your true everyday vibe.</p>
+            </div>
+        </section>
+
+        <section id="reviews" class="reviews-section">
+            <div class="section-header">
+                <h3>Boutique Appreciations</h3>
+            </div>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">"I ordered two custom bracelets from Khushi and I couldn't be happier! She put so much care and creativity into making them, and they turned out beautiful. The quality is impressive, the colors are vibrant, and you can tell she enjoys what she does.If you're looking for cute, handmade bracelets while supporting a young small business, I highly recommend checking her out! Keep up the amazing work! 💖✨"</p>
+                    </div>
+                    <p class="review-author">— Durga A.</p>
+                </div>
+                
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">Khushi's handmade bracelets are beautifully crafted with great attention to detail. The quality is excellent, they're comfortable to wear, and they add a stylish touch to any outfit. I highly reccomend her bracelets to anyone looking for unique, elegant, and well-made accessories."</p>
+                    </div>
+                    <p class="review-author">— Srikar P.</p>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">- [x]   Personally, I’m a Chicago Bears fan, so I’ve asked her to make a bracelet in their colors. Oh man! She did a fantastic job with navy blue and orange colors, and she topped it off with lettered beads. Happiness accessories is my favorite brand in the whole world. So, when she delivered the bracelet to me, it made my day. ❤️</p>
+                    </div>
+                    <p class="review-author">— Vineeth N.</p>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text">I absolutely love my bracelet from Khushi. It's so pretty, well made, and you can tell it was created with a lot of care and creativity. Knowing that Khushi is only 12 years old makes it even more special. it's inspiring to see someone so young doing something she loves. I would definitely recommend supporting her and can't wait to buy another bracelet in the future!</p>
+                    </div>
+                    <p class="review-author">— Krishna M.</p>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text"> I absolutely love my custom bracelet! The craftsmanship, colors, and attention to detail are amazing. The "Diamond Couple" design is so thoughtful and meaningful to me. It's clear that a lot of care and creativity went into making it. I'm especially impressed knowing it was handmade by such a talented young entrepreneur. Keep up the incredible work. Highly recommend!</p>
+                    </div>
+                    <p class="review-author">— Jeevan S.</p>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="review-text"> Khushi's bracelets are really good!! The string is very high quality and the beads are so very pretty. I've ordered over three times and the bracelets always turn out so cute and pretty.</p>
+                    </div>
+                    <p class="review-author">— Cindy W.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="lookbook" class="lookbook-section">
+            <div class="section-header">
+                <h3>Style Inspiration Lookbook</h3>
+            </div>
+            <div class="lookbook-grid">
+                <div class="lookbook-item">✨<span>Stacking Styles</span></div>
+                <div class="lookbook-item">🌸<span>Pastel Sets</span></div>
+                <div class="lookbook-item">☀️<span>Golden Hour Contrast</span></div>
+                <div class="lookbook-item">🧸<span>Custom Monograms</span></div>
+            </div>
+        </section>
+
+        <section id="connect" class="footer-forms">
+            <div class="form-card">
+                <h4>Converse With Us</h4>
+                <form onsubmit="handleFormSubmit(event, 'Message sent successfully to our design concierge!')">
+                    <div class="form-group"><input type="text" placeholder="Full Name" required></div>
+                    <div class="form-group"><input type="email" placeholder="Email Address" required></div>
+                    <div class="form-group"><textarea rows="3" placeholder="How can we assist your mood layout today?" required></textarea></div>
+                    <button type="submit" class="btn-luxury" style="width: 100%;">Send Inquiry</button>
+                </form>
+            </div>
+            <div class="form-card" style="background-color: #FFFDEB; border: 2px dashed var(--soft-pink);">
+                <h4>The Joy Journal</h4>
+                <p style="font-size:0.85rem; margin-bottom: 20px; font-weight: 500; color: #556270;">Subscribe to gain early premier access to seasonal yellow/pink collection releases, secret private sales, and local luxury pop-ups.</p>
+                <form onsubmit="handleFormSubmit(event, 'Welcome to the inner circle! Your exclusive invitation is en route.')">
+                    <div class="form-group"><input type="email" placeholder="Your Luxury Email Address" required></div>
+                    <button type="submit" class="btn-luxury" style="width: 100%; background-color: var(--soft-pink); color: white; border-color: var(--soft-pink);">Join Elite Circle</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Your Selection Bag</h3>
+            <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="toggleCart(false)"></i>
+        </div>
+        <div class="cart-items-list" id="cartItemsList">
+        </div>
+        <div class="cart-footer">
+            <div class="promo-section">
+                <input type="text" id="promoInput" placeholder="PROMO CODE (TRY: JOY)">
+                <button onclick="applyPromo()" style="padding:5px 12px; cursor:pointer; background:none; border:2px solid var(--charcoal); font-weight: 700;">Apply</button>
+            </div>
+            <div class="total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <button class="btn-luxury" style="width:100%; background-color: var(--soft-pink); color: white; border: none;" onclick="openCheckout()">Proceed To Checkout</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="checkout-modal">
+            <div class="modal-body">
+                <div class="modal-title">
+                    <span>Secure Checkout</span>
+                    <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:1.2rem;" onclick="closeCheckout()"></i>
+                </div>
+
+                <div class="order-summary-box">
+                    <h5>Order Summary</h5>
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;">
+                        <span>Items Count:</span>
+                        <span id="modalItemsCount">0</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; border-top:1px solid rgba(0,0,0,0.05); padding-top:5px;">
+                        <span>Total Due:</span>
+                        <span id="modalTotalDue" style="color:var(--soft-pink);">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="express-pay">
+                    <button class="btn-express btn-apple" onclick="processMockPayment('Apple Pay')"><i class="fa-brands fa-apple"></i> Pay</button>
+                    <button class="btn-express btn-paypal" onclick="processMockPayment('PayPal')"><i class="fa-brands fa-paypal"></i> PayPal</button>
+                </div>
+
+                <div class="form-divider">
+                    <span>Or Pay With Credit Card</span>
+                </div>
+
+                <form onsubmit="handlePaymentSubmit(event)">
+                    <div class="form-group">
+                        <input type="text" placeholder="Cardholder Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Card Number" pattern="\d{16}" title="Please enter a valid 16-digit card number" required>
+                    </div>
+                    <div class="checkout-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="MM/YY" pattern="(0[1-1]|1[0-2])\/\d{2}" title="Format: MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="CVV" pattern="\d{3,4}" title="3 or 4 digits" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-luxury" style="width:100%; background-color:var(--charcoal); margin-top:10px;">Pay Securely Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Happiness Accessories Boutique. Crafted with Absolute Sophistication.</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "Sunshine Serotonin Custom Woven Bracelet", price: 15.00, category: "bracelets", emoji: "📿", tag: "Signature Piece" },
+            { id: 2, name: "Soft Pink Cloud Layering Set", price: 28.00, category: "bracelets", emoji: "🌸", tag: "Best Seller" },
+            { id: 3, name: "Custom Varsity Team Alphabet Bead Stack", price: 18.00, category: "bracelets", emoji: "🏈", tag: "Fan Favorite" },
+            { id: 4, name: "Chérei Rose Quartz Ring Band", price: 45.00, category: "jewelry", emoji: "💖", tag: "Limited Run" },
+            { id: 5, name: "Gilded Ivory Blossom Notebook", price: 38.00, category: "lifestyle", emoji: "📔", tag: "Hand Finished" },
+            { id: 6, name: "Sandalwood Warm Amber Candle", price: 42.00, category: "lifestyle", emoji: "🕯️", tag: "House Scent" }
+        ];
+
+        let cart = [];
+        let discount = 0;
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = items.map(prod => `
+                <div class="product-card">
+                    <div class="product-visual">
+                        ${prod.tag ? `<div class="product-badge">${prod.tag}</div>` : ''}
+                        ${prod.emoji}
+                    </div>
+                    <div class="product-details">
+                        <div>
+                            <div class="product-category">${prod.category}</div>
+                            <div class="product-title">${prod.name}</div>
+                        </div>
+                        <div>
+                            <div class="product-price">$${prod.price.toFixed(2)}</div>
+                            <button class="btn-add-cart" onclick="addToCart(${prod.id})">Add to Selection</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category, element) {
+            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
+            element.classList.add('active');
+
+            if(category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        function addToCart(id) {
+            const match = products.find(p => p.id === id);
+            cart.push(match);
+            updateCartDisplay();
+            toggleCart(true);
+        }
+
+        function updateCartDisplay() {
+            document.getElementById('cartBadge').innerText = cart.length;
+            
+            const listElement = document.getElementById('cartItemsList');
+            if(cart.length === 0) {
+                listElement.innerHTML = `<p style="text-align:center; color:#999; margin-top:40px;">Your selection is empty.</p>`;
+            } else {
+                listElement.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div>
+                            <div style="font-weight:700; font-size:0.95rem; color: var(--charcoal);">${item.name}</div>
+                            <div style="color:var(--soft-pink); font-size:0.9rem; font-weight: 600;">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <i class="fa-solid fa-trash-can" style="cursor:pointer; color:#a0aec0;" onclick="removeFromCart(${index})"></i>
+                    </div>
+                `).join('');
+            }
+
+            let rawTotal = cart.reduce((sum, item) => sum + item.price, 0);
+            let finalTotal = rawTotal - (rawTotal * discount);
+            document.getElementById('cartSubtotal').innerText = `$${finalTotal.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function toggleCart(isOpen) {
+            const drawer = document.getElementById('cartDrawer');
+            if(isOpen) drawer.classList.add('active');
+            else drawer.classList.remove('active');
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            if(code === 'JOY') {
+                discount = 0.15;
+                alert('Sophisticated choice! 15% discount applied successfully.');
+                updateCartDisplay();
+            } else {
+                alert('Invalid code entry.');
+            }
+        }
+
+        /* --- CHECKOUT MANAGEMENT SYSTEM --- */
+        function openCheckout() {
+            if (cart.length === 0) {
+                alert('Your bag is empty! Add some beautiful items before checking out.');
+                return;
+            }
+            toggleCart(false);
+            
+            // Set values inside checkout modal summary
+            document.getElementById('modalItemsCount').innerText = cart.length;
+            document.getElementById('modalTotalDue').innerText = document.getElementById('cartSubtotal').innerText;
+            
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function completePaymentSuccess(methodName) {
+            alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade business. Your order has been placed successfully!`);
+            cart = [];
+            discount = 0;
+            document.getElementById('promoInput').value = '';
+            updateCartDisplay();
+            closeCheckout();
+        }
+
+        function processMockPayment(expressPlatform) {
+            completePaymentSuccess(expressPlatform);
+        }
+
+        function handlePaymentSubmit(event) {
+            event.preventDefault();
+            completePaymentSuccess('Credit Card');
+            event.target.reset();
+        }
+
+        function handleFormSubmit(event, message) {
+            event.preventDefault();
+            alert(message);
+            event.target.reset();
+        }
+
+        renderProducts(products);
+    </script>
+</body>
+</html>
