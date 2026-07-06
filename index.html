@@ -834,6 +834,59 @@
         }
 
         /* --- FOOTER --- */
+        .instagram-contact-card {
+            margin-top: 30px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(255,234,32,0.2), rgba(255,20,147,0.15));
+            border: 2px dashed rgba(255,20,147,0.4);
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(255,20,147,0.08);
+        }
+
+        .insta-card-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .insta-card-content h4 {
+            font-size: 1.35rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+
+        .insta-card-content p {
+            max-width: 520px;
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+
+        .btn-insta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--soft-pink);
+            color: var(--white);
+            border: 2px solid var(--soft-pink);
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-insta:hover {
+            background-color: var(--charcoal);
+            border-color: var(--charcoal);
+            color: var(--sunshine-yellow);
+        }
+
         footer {
             text-align: center;
             padding: 40px;
@@ -861,6 +914,8 @@
             .filter-chip { padding: 8px 14px; }
             .product-visual { height: 200px; }
             .product-details { padding: 16px; }
+            .insta-card-content { flex-direction: column; align-items: stretch; }
+            .btn-insta { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -1026,10 +1081,17 @@
                     <button type="submit" class="btn-luxury" style="width: 100%; background-color: var(--soft-pink); color: white; border-color: var(--soft-pink);">Join our Circle</button>
                 </form>
             </div>
-        </section>
-
+    <div class="instagram-contact-card">
+        <div class="insta-card-content">
+            <div>
+                <h4>Contact Our Instagram</h4>
+                <p>Connect with us for behind-the-scenes bracelet drops, color inspiration, and custom order stories.</p>
+            </div>
+            <a href="https://www.instagram.com/happinessaccessories21?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="btn-insta">
+                <i class="fa-brands fa-instagram"></i> @happinessaccessories21
+            </a>
+        </div>
     </div>
-
     <div class="cart-drawer" id="cartDrawer">
         <div class="cart-header">
             <h3 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Your Selection Bag</h3>
@@ -1223,7 +1285,7 @@
         }
 
         function completePaymentSuccess(methodName) {
-            alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade business. Your order has been placed successfully!`);
+            alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade bracelet business. Your order has been placed successfully!`);
             cart = [];
             discount = 0;
             document.getElementById('promoInput').value = '';
