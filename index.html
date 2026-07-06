@@ -29,6 +29,9 @@
 
         html {
             scroll-behavior: smooth;
+            max-width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -36,6 +39,10 @@
             background-color: var(--pastel-yellow-light);
             color: var(--charcoal);
             line-height: 1.6;
+            min-height: 100vh;
+            max-width: 100%;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* --- VIBRANT ANNOUNCEMENT BAR --- */
@@ -129,6 +136,17 @@
             color: var(--soft-pink);
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--charcoal);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
         .cart-icon-wrapper {
             position: relative;
         }
@@ -144,6 +162,45 @@
             padding: 2px 7px;
             border-radius: 50%;
             border: 2px solid var(--white);
+        }
+
+        /* Touch optimizations */
+        a, button {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* Native momentum scrolling on iOS for scrollable lists */
+        .cart-items-list, .product-grid, .lookbook-grid {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Mobile nav behavior */
+        @media (max-width: 860px) {
+            .mobile-menu-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 6%;
+                background-color: rgba(255,255,255,0.98);
+                border-top: 1px solid rgba(30,41,59,0.06);
+                transform: translateY(-6px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease, transform 0.25s ease;
+                z-index: 1100;
+            }
+
+            .nav-links.mobile-active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
         }
 
         /* --- HERO BANNER --- */
@@ -786,6 +843,25 @@
             letter-spacing: 1px;
             font-weight: 500;
         }
+
+        /* Additional small-screen tweaks */
+        @media (max-width: 768px) {
+            .hero { min-height: 50vh; padding: 60px 18px; }
+            .hero h2 { font-size: 2.8rem; }
+            .hero p { font-size: 1rem; letter-spacing: 1.5px; }
+            .btn-luxury { width: 100%; padding: 14px 0; }
+            .brand-pillars, .footer-forms, .lookbook-grid { grid-template-columns: 1fr; }
+            .cart-drawer { width: 100%; right: -100%; }
+            .checkout-modal { max-width: 420px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 { font-size: 2.2rem; }
+            .hero p { font-size: 0.95rem; }
+            .filter-chip { padding: 8px 14px; }
+            .product-visual { height: 200px; }
+            .product-details { padding: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -796,12 +872,15 @@
 
     <nav>
         <a href="#" class="nav-logo">Happiness <span>Accessories</span></a>
-        <ul class="nav-links">
-            <li><a href="#shop">Collection</a></li>
-            <li><a href="#story">Our Story</a></li>
-            <li><a href="#reviews">Appreciations</a></li>
-            <li><a href="#lookbook">Lookbook</a></li>
-            <li><a href="#connect">Connect</a></li>
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-controls="mobileNavLinks" aria-expanded="false" onclick="toggleMobileMenu()" aria-label="Open navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="mobileNavLinks">
+            <li><a href="#shop" onclick="closeMobileMenu()">Collection</a></li>
+            <li><a href="#story" onclick="closeMobileMenu()">Our Story</a></li>
+            <li><a href="#reviews" onclick="closeMobileMenu()">Appreciations</a></li>
+            <li><a href="#lookbook" onclick="closeMobileMenu()">Lookbook</a></li>
+            <li><a href="#connect" onclick="closeMobileMenu()">Connect</a></li>
         </ul>
         <div class="nav-icons">
             <div class="cart-icon-wrapper" onclick="toggleCart(true)">
@@ -1166,7 +1245,39 @@
             event.preventDefault();
             alert(message);
             event.target.reset();
+            closeMobileMenu();
         }
+
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('mobileNavLinks');
+            const btn = document.getElementById('mobileMenuToggle');
+            if (!navLinks || !btn) return;
+            const isActive = navLinks.classList.toggle('mobile-active');
+            btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        }
+
+        function closeMobileMenu() {
+            const navLinks = document.getElementById('mobileNavLinks');
+            const btn = document.getElementById('mobileMenuToggle');
+            if (!navLinks) return;
+            navLinks.classList.remove('mobile-active');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+
+        // close mobile menu on resize to desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860) closeMobileMenu();
+        });
+
+        // close mobile menu when clicking outside the nav on mobile
+        document.addEventListener('click', function (e) {
+            const nav = document.querySelector('nav');
+            const active = document.getElementById('mobileNavLinks');
+            if (!nav || !active) return;
+            if (active.classList.contains('mobile-active') && !e.target.closest('nav')) {
+                closeMobileMenu();
+            }
+        });
 
         renderProducts(products);
     </script>
