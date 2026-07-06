@@ -898,24 +898,93 @@
         }
 
         /* Additional small-screen tweaks */
+        @media (max-width: 860px) {
+            nav {
+                padding: 16px 5%;
+            }
+
+            .mobile-menu-toggle { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 6%;
+                background-color: rgba(255,255,255,0.98);
+                border-top: 1px solid rgba(30,41,59,0.06);
+                transform: translateY(-6px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease, transform 0.25s ease;
+                z-index: 1100;
+                max-height: calc(100vh - 90px);
+                overflow-y: auto;
+            }
+
+            .nav-links.mobile-active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 12px 0;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero { min-height: 50vh; padding: 60px 18px; }
-            .hero h2 { font-size: 2.8rem; }
-            .hero p { font-size: 1rem; letter-spacing: 1.5px; }
+            .hero { min-height: 48vh; padding: 48px 18px; }
+            .hero h2 { font-size: 2.6rem; }
+            .hero p { font-size: 1rem; letter-spacing: 1.5px; max-width: 100%; }
             .btn-luxury { width: 100%; padding: 14px 0; }
-            .brand-pillars, .footer-forms, .lookbook-grid { grid-template-columns: 1fr; }
+            .brand-pillars, .footer-forms, .lookbook-grid { grid-template-columns: 1fr; gap: 20px; }
+            .brand-story { display: grid; grid-template-columns: 1fr; padding: 32px 20px; gap: 24px; }
+            .story-visual { padding: 30px; font-size: 5.5rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .filter-container { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .product-visual { height: 240px; }
+            .product-details { padding: 20px; }
+            .product-card, .pillar-card, .lookbook-item, .form-card, .review-card {
+                min-width: 0;
+                width: 100%;
+            }
+            .review-card { padding: 24px; }
+            .lookbook-item { height: 220px; }
+            .footer-forms { gap: 24px; }
+            .form-card { padding: 30px; }
             .cart-drawer { width: 100%; right: -100%; }
-            .checkout-modal { max-width: 420px; }
+            .checkout-modal { max-width: 420px; margin: 0 12px; }
+            .section-header h3 { font-size: 1.8rem; }
+            .footer-forms { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
+            .hero { padding: 36px 16px; }
             .hero h2 { font-size: 2.2rem; }
-            .hero p { font-size: 0.95rem; }
-            .filter-chip { padding: 8px 14px; }
+            .hero p { font-size: 0.95rem; letter-spacing: 1px; }
+            .section-header h3 { font-size: 1.5rem; letter-spacing: 1.5px; }
+            .filter-chip { padding: 8px 14px; font-size: 0.85rem; }
             .product-visual { height: 200px; }
-            .product-details { padding: 16px; }
+            .product-details { padding: 18px; }
+            .btn-luxury { font-size: 0.95rem; }
+            .brand-story { padding: 24px 16px; }
+            .story-visual { font-size: 4.8rem; padding: 24px; }
+            .review-card { padding: 22px; }
+            .lookbook-item { height: 200px; }
+            .footer-forms { grid-template-columns: 1fr; }
+            .form-card { padding: 26px; }
             .insta-card-content { flex-direction: column; align-items: stretch; }
             .btn-insta { width: 100%; justify-content: center; }
+            footer { padding: 28px 18px; font-size: 0.85rem; }
+            .nav-links { padding: 12px 4%; }
         }
     </style>
 </head>
