@@ -474,6 +474,46 @@
             box-shadow: 0 4px 12px rgba(255, 20, 147, 0.2);
         }
 
+        /* --- CUSTOMIZE SECTION (Yellow & Pink theme) --- */
+        .customize-section {
+            background: linear-gradient(135deg, rgba(255,234,32,0.12) 0%, rgba(255,20,147,0.06) 100%);
+            border: 2px solid rgba(255,234,32,0.18);
+            padding: 28px;
+            margin: 40px 0;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .customize-section h3 {
+            margin: 0 0 6px 0;
+            color: var(--charcoal);
+            font-size: 1.4rem;
+        }
+
+        .customize-input {
+            padding: 12px 14px;
+            border-radius: 6px;
+            border: 1px solid rgba(30,41,59,0.08);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 64px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .btn-customize {
+            background-color: var(--sunshine-yellow);
+            color: var(--charcoal);
+            border: 2px solid rgba(255,234,32,0.9);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
         /* --- BRAND STORY SECTION --- */
         .brand-story {
             background-color: var(--white);
@@ -1239,6 +1279,16 @@
         </div>
     </div>
 
+    <section id="customize" class="customize-section" aria-labelledby="customizeHeading">
+        <h3 id="customizeHeading">Customize Your Bracelet</h3>
+        <p style="margin:0 0 8px 0; color: #555;">Enter the message you'd like engraved on your Custom Designed Bracelet. Keep it short and elegant.</p>
+        <textarea id="customMessage" class="customize-input" placeholder="e.g. Stay Bright — Khushi" aria-label="Custom message for bracelet"></textarea>
+        <div style="display:flex; gap:12px; align-items:center;">
+            <button class="btn-customize" onclick="handleCustomizeSubmit(event)">Add Customized Bracelet to Selection — $8.00</button>
+            <button class="btn-luxury" style="background:transparent; border-color:rgba(30,41,59,0.08); color:var(--charcoal);" onclick="document.getElementById('customMessage').focus();">Focus Message</button>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2026 Happiness Accessories Boutique. Crafted with Absolute Sophistication.</p>
     </footer>
@@ -1267,11 +1317,11 @@
                     <div class="product-details">
                         <div>
                             <div class="product-category">${prod.category}</div>
-                            <div class="product-title">${prod.name}</div>
+                            <div class="product-title">${prod.id === 6 ? `<a href="#customize" class="customize-link" onclick="document.getElementById('customize').scrollIntoView({behavior:'smooth'}); return false;">${prod.name}</a>` : prod.name}</div>
                         </div>
                         <div>
                             <div class="product-price">$${prod.price.toFixed(2)}</div>
-                            <button class="btn-add-cart" onclick="addToCart(${prod.id})">Add to Selection</button>
+                            ${prod.id === 6 ? `<button class="btn-add-cart" onclick="addToCart(${prod.id})">Add to Selection</button> <button class="btn-customize" onclick="document.getElementById('customize').scrollIntoView({behavior:'smooth'});">Customize</button>` : `<button class="btn-add-cart" onclick="addToCart(${prod.id})">Add to Selection</button>`}
                         </div>
                     </div>
                 </div>
@@ -1417,6 +1467,36 @@
                 closeMobileMenu();
             }
         });
+
+        // Add customized bracelet to cart
+        function addToCartCustom(message) {
+            const base = products.find(p => p.id === 6) || { id: 6, name: 'Custom Designed Bracelet', price: 8.00, category: 'bracelets', image: 'my-image6.jpeg' };
+            const customItem = Object.assign({}, base, {
+                id: `custom-${Date.now()}`,
+                name: base.name + (message ? ` — "${message}"` : ''),
+                price: 8.00,
+                customMessage: message || ''
+            });
+            cart.push(customItem);
+            updateCartDisplay();
+            toggleCart(true);
+        }
+
+        function handleCustomizeSubmit(event) {
+            event && event.preventDefault && event.preventDefault();
+            const field = document.getElementById('customMessage');
+            if (!field) return alert('Customization field not found.');
+            const msg = field.value.trim();
+            if (msg.length === 0) {
+                alert('Please enter a custom message before adding the bracelet.');
+                field.focus();
+                return;
+            }
+            addToCartCustom(msg);
+            field.value = '';
+            const successMsg = 'Customized bracelet added to your selection.';
+            setTimeout(() => alert(successMsg), 60);
+        }
 
         renderProducts(products);
     </script>
