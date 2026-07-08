@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Customize — Happiness Accessories</title>
+  <style>
+    :root{--sunshine-yellow:#FFE820;--soft-pink:#FF1493;--charcoal:#1E293B}
+    body{font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0;background:#fff;color:var(--charcoal);}
+    header{padding:18px 24px;border-bottom:1px solid rgba(0,0,0,0.04);display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:800}
+    main{max-width:880px;margin:28px auto;padding:0 18px}
+    .customize-section{background:linear-gradient(135deg, rgba(255,234,32,0.12) 0%, rgba(255,20,147,0.06) 100%);border:2px solid rgba(255,234,32,0.18);padding:28px;border-radius:10px}
+    .customize-section h1{margin:0 0 6px 0;font-size:1.6rem}
+    .customize-section p{margin:0 0 12px 0;color:#555}
+    .customize-input{width:100%;min-height:100px;padding:12px;border-radius:8px;border:1px solid rgba(30,41,59,0.08);resize:vertical}
+    .actions{display:flex;gap:12px;margin-top:12px}
+    .btn-primary{background:var(--sunshine-yellow);border:0;padding:12px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+    .btn-link{background:transparent;border:1px solid rgba(30,41,59,0.06);padding:10px 14px;border-radius:8px;cursor:pointer}
+    .note{margin-top:12px;color:#444;font-size:0.95rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Happiness Accessories</div>
+    <nav><a href="index.html">Back to Shop</a></nav>
+  </header>
+  <main>
+    <section class="customize-section" aria-labelledby="custHead">
+      <h1 id="custHead">Customize Your Bracelet</h1>
+      <p>Enter the message you'd like engraved on your Custom Designed Bracelet. Keep it short and elegant.</p>
+      <textarea id="customMessage" class="customize-input" placeholder="e.g. Stay Bright — Khushi" aria-label="Custom message for bracelet"></textarea>
+      <div class="actions">
+        <button id="saveBtn" class="btn-primary">Save Message & Return</button>
+        <button id="previewBtn" class="btn-link">Preview</button>
+      </div>
+      <div class="note">Saved messages are stored locally in your browser. After returning to the shop, you can copy or paste the message when adding a customized bracelet.</div>
+    </section>
+  </main>
+  <script>
+    const saveBtn = document.getElementById('saveBtn');
+    const previewBtn = document.getElementById('previewBtn');
+    const textarea = document.getElementById('customMessage');
+
+    saveBtn.addEventListener('click', function(){
+      const msg = textarea.value.trim();
+      if(!msg){ alert('Please enter a message to save.'); textarea.focus(); return; }
+      localStorage.setItem('happiness_custom_message', msg);
+      alert('Message saved. Returning to shop.');
+      window.location.href = 'index.html#shop';
+    });
+
+    previewBtn.addEventListener('click', function(){
+      const msg = textarea.value.trim();
+      if(!msg){ alert('Enter a message to preview.'); textarea.focus(); return; }
+      alert('Preview:\n' + msg);
+    });
+  </script>
+</body>
+</html>
