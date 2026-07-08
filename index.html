@@ -1303,6 +1303,24 @@
         }
 
         function addToCart(id) {
+            // If adding the customizable bracelet and a saved custom message exists,
+            // create a custom cart item that includes the message and adjusted price.
+            if (id === 6) {
+                const saved = localStorage.getItem('happiness_custom_message');
+                if (saved && saved.trim().length > 0) {
+                    const base = products.find(p => p.id === 6) || { id: 6, name: 'Custom Designed Bracelet', price: 8.00, category: 'bracelets', image: 'my-image6.jpeg' };
+                    const customItem = Object.assign({}, base, {
+                        id: `custom-${Date.now()}`,
+                        name: base.name + ' — "' + saved + '"',
+                        price: 8.00,
+                        customMessage: saved
+                    });
+                    cart.push(customItem);
+                    updateCartDisplay();
+                    toggleCart(true);
+                    return;
+                }
+            }
             const match = products.find(p => p.id === id);
             cart.push(match);
             updateCartDisplay();

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Owner Dashboard — Happiness Accessories</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;color:#1E293B;margin:0;padding:18px}
+    h1{margin:0 0 12px}
+    .controls{display:flex;gap:10px;margin-bottom:12px}
+    .orders{max-width:980px}
+    .order{border:1px solid rgba(0,0,0,0.06);padding:12px;border-radius:8px;margin-bottom:10px}
+    .meta{font-size:0.9rem;color:#666}
+    button{cursor:pointer}
+  </style>
+</head>
+<body>
+  <h1>Owner Dashboard</h1>
+  <div class="controls">
+    <button id="refreshBtn">Refresh</button>
+    <button id="exportBtn">Export JSON</button>
+    <button id="clearBtn">Clear All</button>
+  </div>
+  <div class="orders" id="ordersList">Loading orders...</div>
+
+  <script>
+    const ordersList = document.getElementById('ordersList');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function renderOrders(){
+      const orders = JSON.parse(localStorage.getItem('happiness_orders') || '[]');
+      if(!orders || orders.length === 0){ ordersList.innerHTML = '<p>No orders found.</p>'; return; }
+      ordersList.innerHTML = orders.map(o => `
+        <div class="order" data-id="${o.id}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>${o.id}</strong>
+            <span class="meta">${o.status} • ${new Date(o.createdAt).toLocaleString()}</span>
+          </div>
+          <div style="margin-top:8px">${o.message}</div>
+          <div style="margin-top:8px"><button onclick="mark('${o.id}','submitted')">Mark Submitted</button> <button onclick="mark('${o.id}','fulfilled')">Mark Fulfilled</button> <button onclick="remove('${o.id}')">Delete</button></div>
+        </div>
+      `).join('');
+    }
+
+    function mark(id, status){
+      const orders = JSON.parse(localStorage.getItem('happiness_orders') || '[]');
+      const idx = orders.findIndex(o => o.id === id);
+      if(idx === -1) return alert('Order not found');
+      orders[idx].status = status;
+      localStorage.setItem('happiness_orders', JSON.stringify(orders));
+      renderOrders();
+    }
+
+    function remove(id){
+      let orders = JSON.parse(localStorage.getItem('happiness_orders') || '[]');
+      orders = orders.filter(o => o.id !== id);
+      localStorage.setItem('happiness_orders', JSON.stringify(orders));
+      renderOrders();
+    }
+
+    refreshBtn.addEventListener('click', renderOrders);
+    exportBtn.addEventListener('click', function(){
+      const data = localStorage.getItem('happiness_orders') || '[]';
+      const blob = new Blob([data], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'happiness_orders.json';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+    clearBtn.addEventListener('click', function(){ if(confirm('Clear all orders?')){ localStorage.removeItem('happiness_orders'); renderOrders(); }});
+
+    renderOrders();
+  </script>
+</body>
+</html>

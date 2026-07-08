@@ -31,14 +31,16 @@
       <p>Enter the message you'd like engraved on your Custom Designed Bracelet. Keep it short and elegant.</p>
       <textarea id="customMessage" class="customize-input" placeholder="e.g. Stay Bright — Khushi" aria-label="Custom message for bracelet"></textarea>
       <div class="actions">
-        <button id="saveBtn" class="btn-primary">Save Message & Return</button>
+        <button id="saveBtn" class="btn-primary">Save Message Locally</button>
+        <button id="submitBtn" class="btn-primary" style="background:var(--soft-pink);">Submit To Owner</button>
         <button id="previewBtn" class="btn-link">Preview</button>
       </div>
-      <div class="note">Saved messages are stored locally in your browser. After returning to the shop, you can copy or paste the message when adding a customized bracelet.</div>
+      <div class="note">Saved messages are stored locally in your browser. Submitting will add the message to the local orders list (client-side). Owner tools can view/manage these orders if they use the same storage.</div>
     </section>
   </main>
   <script>
     const saveBtn = document.getElementById('saveBtn');
+    const submitBtn = document.getElementById('submitBtn');
     const previewBtn = document.getElementById('previewBtn');
     const textarea = document.getElementById('customMessage');
 
@@ -46,7 +48,22 @@
       const msg = textarea.value.trim();
       if(!msg){ alert('Please enter a message to save.'); textarea.focus(); return; }
       localStorage.setItem('happiness_custom_message', msg);
-      alert('Message saved. Returning to shop.');
+      // also save a draft order entry
+      const orders = JSON.parse(localStorage.getItem('happiness_orders') || '[]');
+      orders.push({ id: `draft-${Date.now()}`, message: msg, status: 'draft', createdAt: new Date().toISOString() });
+      localStorage.setItem('happiness_orders', JSON.stringify(orders));
+      alert('Message saved locally as draft. Returning to shop.');
+      window.location.href = 'index.html#shop';
+    });
+
+    submitBtn.addEventListener('click', function(){
+      const msg = textarea.value.trim();
+      if(!msg){ alert('Please enter a message to submit.'); textarea.focus(); return; }
+      localStorage.setItem('happiness_custom_message', msg);
+      const orders = JSON.parse(localStorage.getItem('happiness_orders') || '[]');
+      orders.push({ id: `order-${Date.now()}`, message: msg, status: 'submitted', createdAt: new Date().toISOString() });
+      localStorage.setItem('happiness_orders', JSON.stringify(orders));
+      alert('Message submitted to owner (stored locally). Returning to shop.');
       window.location.href = 'index.html#shop';
     });
 
