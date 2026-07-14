@@ -1278,8 +1278,8 @@
                     </div>
                     <div class="product-details">
                         <div>
-                                            <div class="product-category">${prod.category}</div>
-                                            <div class="product-title">${prod.id === 6 ? `<a href="customize.html" class="customize-link">${prod.name}</a>` : prod.name}</div>
+                            <div class="product-category">${prod.category === 'bracelets' ? 'Glass Bead Bracelets' : prod.category}</div>
+                            <div class="product-title">${prod.id === 6 ? `<a href="customize.html" class="customize-link">${prod.name}</a>` : prod.name}</div>
                         </div>
                         <div>
                             <div class="product-price">$${prod.price.toFixed(2)}</div>
