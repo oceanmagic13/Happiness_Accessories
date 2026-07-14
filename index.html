@@ -1067,9 +1067,9 @@
 
             <div class="filter-container">
                 <span class="filter-chip active" onclick="filterProducts('all', this)">All Accessories</span>
-                <span class="filter-chip" onclick="filterProducts('bracelets', this)">Bracelets</span>
-                <span class="filter-chip" onclick="filterProducts('jewelry', this)">Other Jewelry</span>
-                <span class="filter-chip" onclick="filterProducts('lifestyle', this)">Lifestyle</span>
+                <span class="filter-chip" onclick="filterProducts('bracelets', this)">Glass Bead Bracelets</span>
+                <span class="filter-chip" onclick="filterProducts('jewelry', this)">Clay Bead Bracelets</span>
+                <span class="filter-chip" onclick="filterProducts('lifestyle', this)">Loom Bracelets</span>
             </div>
 
             <div class="product-grid" id="productGrid">
@@ -1303,24 +1303,6 @@
         }
 
         function addToCart(id) {
-            // If adding the customizable bracelet and a saved custom message exists,
-            // create a custom cart item that includes the message and adjusted price.
-            if (id === 6) {
-                const saved = localStorage.getItem('happiness_custom_message');
-                if (saved && saved.trim().length > 0) {
-                    const base = products.find(p => p.id === 6) || { id: 6, name: 'Custom Designed Bracelet', price: 8.00, category: 'bracelets', image: 'my-image6.jpeg' };
-                    const customItem = Object.assign({}, base, {
-                        id: `custom-${Date.now()}`,
-                        name: base.name + ' — "' + saved + '"',
-                        price: 8.00,
-                        customMessage: saved
-                    });
-                    cart.push(customItem);
-                    updateCartDisplay();
-                    toggleCart(true);
-                    return;
-                }
-            }
             const match = products.find(p => p.id === id);
             cart.push(match);
             updateCartDisplay();
