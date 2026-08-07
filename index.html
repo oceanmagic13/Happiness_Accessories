@@ -1260,12 +1260,16 @@
         <p>&copy; 2026 Happiness Accessories Boutique. Crafted with Absolute Sophistication.</p>
     </footer>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script>
         function renderPayPalButton() {
-            if (typeof paypal === 'undefined') return;
             const container = document.getElementById('paypal-button-container');
             if (!container || container.dataset.rendered === 'true') return;
+
+            if (typeof paypal === 'undefined' || typeof paypal.Buttons !== 'function') {
+                container.innerHTML = '<p style="font-size:0.9rem; color:#a33; margin:0;">PayPal could not be loaded right now.</p>';
+                return;
+            }
 
             container.dataset.rendered = 'true';
             paypal.Buttons({
