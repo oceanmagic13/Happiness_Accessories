@@ -22,6 +22,7 @@ MIME_TYPES = {
 orders = []
 inquiries = []
 subscribers = []
+payments = []
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -35,6 +36,10 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == '/api/orders':
             self.send_json(200, {'orders': orders})
+            return
+
+        if path == '/api/payments':
+            self.send_json(200, {'payments': payments})
             return
 
         if path == '/api/inquiries':
@@ -87,6 +92,21 @@ class Handler(BaseHTTPRequestHandler):
             }
             orders.append(order)
             self.send_json(201, {'success': True, 'order': order})
+            return
+
+        if path == '/api/payments':
+            data = self.read_json_body()
+            payment = {
+                'id': f"payment-{len(payments) + 1}",
+                'method': data.get('method', 'Unknown'),
+                'cardholderName': data.get('cardholderName', ''),
+                'cardLast4': (data.get('cardNumber', '')[-4:] if data.get('cardNumber') else ''),
+                'amount': data.get('amount', 0),
+                'status': 'mock_authorized',
+                'createdAt': self.now_iso(),
+            }
+            payments.append(payment)
+            self.send_json(201, {'success': True, 'payment': payment})
             return
 
         if path == '/api/inquiries':

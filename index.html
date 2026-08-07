@@ -1374,20 +1374,39 @@
         }
 
         async function completePaymentSuccess(methodName) {
-            const payload = {
+            const cardholderInput = document.querySelector('#checkoutModal input[placeholder="Cardholder Name"]');
+            const cardNumberInput = document.querySelector('#checkoutModal input[placeholder="Card Number"]');
+            const totalDue = document.getElementById('modalTotalDue').innerText.replace('$', '') || '0';
+
+            const paymentPayload = {
+                method: methodName,
+                cardholderName: cardholderInput ? cardholderInput.value : 'Guest Customer',
+                cardNumber: cardNumberInput ? cardNumberInput.value : '',
+                amount: parseFloat(totalDue)
+            };
+
+            const orderPayload = {
                 items: cart.map(item => ({ id: item.id, name: item.name, price: item.price })),
-                customerName: 'Guest Customer',
+                customerName: paymentPayload.cardholderName || 'Guest Customer',
                 email: ''
             };
 
             try {
-                const response = await fetch('/api/orders', {
+                const paymentResponse = await fetch('/api/payments', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(paymentPayload)
                 });
-                const result = await response.json();
-                if (!response.ok) throw new Error(result.message || 'Order submission failed');
+                const paymentResult = await paymentResponse.json();
+                if (!paymentResponse.ok) throw new Error(paymentResult.message || 'Payment submission failed');
+
+                const orderResponse = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderPayload)
+                });
+                const orderResult = await orderResponse.json();
+                if (!orderResponse.ok) throw new Error(orderResult.message || 'Order submission failed');
 
                 alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade bracelet business. Your order has been placed successfully!`);
                 cart = [];
@@ -1396,7 +1415,7 @@
                 updateCartDisplay();
                 closeCheckout();
             } catch (error) {
-                alert(`Order could not be saved: ${error.message}`);
+                alert(`Payment could not be processed: ${error.message}`);
             }
         }
 
