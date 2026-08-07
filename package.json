@@ -1,0 +1,9 @@
+{
+  "name": "happiness-accessories-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple backend for the Happiness Accessories storefront",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

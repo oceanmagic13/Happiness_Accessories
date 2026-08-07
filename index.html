@@ -1155,18 +1155,18 @@
         <section id="connect" class="footer-forms">
             <div class="form-card">
                 <h4>Converse With Us</h4>
-                <form onsubmit="handleFormSubmit(event, 'Message sent successfully to our design concierge!')">
-                    <div class="form-group"><input type="text" placeholder="Full Name" required></div>
-                    <div class="form-group"><input type="email" placeholder="Email Address" required></div>
-                    <div class="form-group"><textarea rows="3" placeholder="How can we assist your mood layout today?" required></textarea></div>
+                <form id="inquiryForm" onsubmit="handleFormSubmit(event, 'Message sent successfully to our design concierge!')">
+                    <div class="form-group"><input type="text" name="name" placeholder="Full Name" required></div>
+                    <div class="form-group"><input type="email" name="email" placeholder="Email Address" required></div>
+                    <div class="form-group"><textarea name="message" rows="3" placeholder="How can we assist your mood layout today?" required></textarea></div>
                     <button type="submit" class="btn-luxury" style="width: 100%;">Send Inquiry</button>
                 </form>
             </div>
             <div class="form-card" style="background-color: #FFFDEB; border: 2px dashed var(--soft-pink);">
                 <h4>The Joy Journal</h4>
                 <p style="font-size:0.85rem; margin-bottom: 20px; font-weight: 500; color: #556270;">Subscribe to gain early premier access to seasonal yellow/pink collection releases, secret private sales, and local luxury pop-ups.</p>
-                <form onsubmit="handleFormSubmit(event, 'Welcome to the inner circle! Your exclusive invitation is en route.')">
-                    <div class="form-group"><input type="email" placeholder="Your Luxury Email Address" required></div>
+                <form id="subscriberForm" onsubmit="handleFormSubmit(event, 'Welcome to the inner circle! Your exclusive invitation is en route.')">
+                    <div class="form-group"><input type="email" name="email" placeholder="Your Luxury Email Address" required></div>
                     <button type="submit" class="btn-luxury" style="width: 100%; background-color: var(--soft-pink); color: white; border-color: var(--soft-pink);">Join our Circle</button>
                 </form>
             </div>
@@ -1373,13 +1373,31 @@
             document.getElementById('checkoutModal').classList.remove('active');
         }
 
-        function completePaymentSuccess(methodName) {
-            alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade bracelet business. Your order has been placed successfully!`);
-            cart = [];
-            discount = 0;
-            document.getElementById('promoInput').value = '';
-            updateCartDisplay();
-            closeCheckout();
+        async function completePaymentSuccess(methodName) {
+            const payload = {
+                items: cart.map(item => ({ id: item.id, name: item.name, price: item.price })),
+                customerName: 'Guest Customer',
+                email: ''
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'Order submission failed');
+
+                alert(`🎉 Payment Successful via ${methodName}! Thank you for supporting Khushi's handmade bracelet business. Your order has been placed successfully!`);
+                cart = [];
+                discount = 0;
+                document.getElementById('promoInput').value = '';
+                updateCartDisplay();
+                closeCheckout();
+            } catch (error) {
+                alert(`Order could not be saved: ${error.message}`);
+            }
         }
 
         function processMockPayment(expressPlatform) {
@@ -1392,11 +1410,34 @@
             event.target.reset();
         }
 
-        function handleFormSubmit(event, message) {
+        async function handleFormSubmit(event, message) {
             event.preventDefault();
-            alert(message);
-            event.target.reset();
-            closeMobileMenu();
+            const form = event.target;
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            try {
+                let endpoint = '/api/inquiries';
+                let successMessage = message;
+
+                if (form.id === 'subscriberForm') {
+                    endpoint = '/api/subscribers';
+                    successMessage = 'Welcome to the inner circle! Your exclusive invitation is en route.';
+                }
+
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'Submission failed');
+
+                alert(successMessage);
+                form.reset();
+                closeMobileMenu();
+            } catch (error) {
+                alert(`Submission failed: ${error.message}`);
+            }
         }
 
         function toggleMobileMenu() {
