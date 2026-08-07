@@ -1227,6 +1227,11 @@
                 </div>
 
                 <div class="form-divider">
+                    <span>Or Pay With PayPal</span>
+                </div>
+                <div id="paypal-button-container" style="margin: 12px 0;"></div>
+
+                <div class="form-divider">
                     <span>Or Pay With Credit Card</span>
                 </div>
 
@@ -1255,7 +1260,35 @@
         <p>&copy; 2026 Happiness Accessories Boutique. Crafted with Absolute Sophistication.</p>
     </footer>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
     <script>
+        function renderPayPalButton() {
+            if (typeof paypal === 'undefined') return;
+            const container = document.getElementById('paypal-button-container');
+            if (!container || container.dataset.rendered === 'true') return;
+
+            container.dataset.rendered = 'true';
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '10.00'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        completePaymentSuccess('PayPal');
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderPayPalButton);
+
         const products = [
             { id: 1, name: "Fearless Bracelet", price: 7.00, category: "bracelets", image: "my-image1.jpeg" },
             { id: 2, name: "Blessed Bracelet", price: 7.00, category: "bracelets", image: "my-image2.jpeg" },
